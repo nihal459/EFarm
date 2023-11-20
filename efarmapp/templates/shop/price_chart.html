@@ -1,0 +1,87 @@
+{% extends 'shop/base.html' %}
+
+{% load static %}
+
+{% block content %}
+
+
+<div class="container-fluid">
+    <div class="card">
+        <div class="card-body">
+            <h5 class="card-title fw-semibold mb-4">Upload Price Chart</h5>
+            
+            <form method="POST">
+                {% csrf_token %}
+                
+                <!-- Item Name Input -->
+                <div class="mb-3">
+                    <label for="item_name" class="form-label">Item Name</label>
+                    <input type="text" class="form-control" id="item_name" name="item_name" required>
+                </div>
+                
+                <!-- Price Input -->
+                <div class="mb-3">
+                    <label for="price" class="form-label">Price per kg</label>
+                    <input type="number" class="form-control" id="price" name="price" required>
+                </div>
+
+                <div class="mb-3">
+                    <label for="fruits">Fruit</label>
+                    <input type="checkbox" id="fruits" name="fruits" {% if get_profile.fruits %}checked{% endif %}>
+                </div>
+        
+                <div class="mb-3">
+                    <label for="vegetables">Vegetable</label>
+                    <input type="checkbox" id="vegetables" name="vegetables" {% if get_profile.vegetables %}checked{% endif %}>
+                </div>
+                
+                <!-- Submit Button -->
+                <button type="submit" class="btn btn-success">Submit</button>
+            </form>
+            
+        </div>
+
+    </div>
+    <div class="container mt-4">
+        <h5 class="card-title fw-semibold mb-4">Price Chart</h5>
+        <div class="table-responsive">
+            <table class="table table-bordered table-striped">
+                <thead>
+                    <tr>
+                        <th scope="col">Item Name</th>
+                        <th scope="col">Item Price</th>
+                        <th scope="col">Item Type</th>
+                        <th></th>
+                        <th></th>
+
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for item in get_pricechart %}
+                        <tr>
+                            <td>{{ item.item_name }}</td>
+                            <td>₹{{ item.item_perkg }}/-</td>
+                            <td>
+                                {% if item.fruits %}
+                                    Fruit
+                                {% elif item.vegetables %}
+                                    Vegetable
+                                {% else %}
+                                    N/A
+                                {% endif %}
+                            </td>
+                            <td><a href="{% url 'edit_pricechart' item.pk %}" class="btn btn-success">Edit</a></td>
+
+                            <td><a href="{% url 'delete_pricechart' item.pk %}" class="btn btn-danger">Delete</a></td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+
+
+
+{% endblock %}

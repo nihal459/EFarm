@@ -1,0 +1,66 @@
+{% extends 'farmer/base.html' %}
+
+{% load static %}
+
+{% block content %}
+
+<div class="container-fluid">
+    <div class="card">
+        <div class="card-body">
+            <div style="text-align: center;">
+                <a href="{{ shops.imageURL }}" target="_blank">
+                    <img src="{{ shops.imageURL }}" alt="Profile Picture" height="250px">
+                </a>
+            </div>
+            <br>
+            <h5 class="card-title fw-semibold mb-4 text-center">{{shops.name}}</h5>
+            <br>
+            <p class="mb-0 text-center">District: {{shops.district}}</p>
+            <p class="mb-0 text-center">Address: {{shops.address}}</p>
+            <p class="mb-0 text-center"><a href="{{shops.location}}">Location</a></p>
+            <p class="mb-0 text-center">Mobile Number: {{shops.mobile_number}}</p>
+            <p class="mb-0 text-center">Fruits: {% if shops.fruits %} Yes {% else %} No {% endif %}</p>
+            <p class="mb-0 text-center">Vegetables: {% if shops.vegetables %} Yes {% else %} No {% endif %}</p>
+            {% comment %} <p class="mb-0 text-center">Bank Name: {{shops.bank_name}}</p>
+            <p class="mb-0 text-center">Account Number: {{shops.bank_account_number}}</p>
+            <p class="mb-0 text-center">IFSC: {{shops.ifsc_code}}</p>
+            <p class="mb-0 text-center">Gpay/Upi Id: {{shops.upi_id}}</p> {% endcomment %}
+
+            <br>
+
+            <!-- Price Chart Table -->
+            <div class="container mt-4">
+                <h5 class="card-title fw-semibold mb-4">Price Chart</h5>
+                <div class="table-responsive">
+                    <table class="table table-bordered table-striped">
+                        <thead>
+                            <tr>
+                                <th>Item Name</th>
+                                <th>Item Price per kg</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for item in pricechart %}
+                                <tr>
+                                    <td>{{ item.item_name }}</td>
+                                    <td>Rs.{{ item.item_perkg }}/-</td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <!-- End Price Chart Table -->
+            <br>
+            <div class="text-center">
+                <a href="{% url 'business' shops.pk %}" class="btn btn-success">Sell My Products</a>
+            </div>
+            <br>
+
+        </div>
+    </div>
+</div>
+
+
+
+{% endblock %}

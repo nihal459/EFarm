@@ -1,0 +1,90 @@
+{% extends 'shop/base.html' %}
+
+{% load static %}
+
+{% block content %}
+
+<br>
+<br>
+<div class="container mt-4">
+    <h5 class="card-title fw-semibold mb-4">My Business</h5>
+    <div class="table-responsive">
+        <table class="table table-bordered table-striped">
+            <thead>
+                <tr>
+                    <th>Farmer Name</th>
+                    <th>Item Name</th>
+                    <th>Item Quantity (kg)</th>
+                    <th>Amount</th>
+                    <th>Farmer Accept</th>
+                    <th>Shop Accept</th>
+                    <th>Amount Paid</th>
+                    <th>Amount Received</th>
+                    <th>Farmer Delivered</th>
+                    <th>Shop Received</th>
+                    <th></th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for business in business %}
+                    <tr>
+                        <td><a href="{% url 'viewfarmersingle' business.farmerid %}">{{ business.farmername }}</a></td>
+                        <td>{{ business.item_name }}</td>
+                        <td>{{ business.item_kg }}</td>
+                        <td>Rs.{{ business.amount }}/-</td>
+                        <td>
+                            {% if business.farmer_accept %}
+                                <span class="text-success"><i class="bi bi-check-circle"></i></span>
+                            {% else %}
+                                <span class="text-danger"><i class="bi bi-x-circle"></i></span>
+                            {% endif %}
+                        </td>
+                        <td>
+                            {% if business.shop_accept %}
+                                <span class="text-success"><i class="bi bi-check-circle"></i></span>
+                            {% else %}
+                                <span class="text-danger"><i class="bi bi-x-circle"></i></span>
+                            {% endif %}
+                        </td>
+                        <td>
+                            {% if business.amount_paid %}
+                                <span class="text-success"><i class="bi bi-check-circle"></i></span>
+                            {% else %}
+                                <span class="text-danger"><i class="bi bi-x-circle"></i></span>
+                            {% endif %}
+                        </td>
+                        <td>
+                            {% if business.amount_received %}
+                                <span class="text-success"><i class="bi bi-check-circle"></i></span>
+                            {% else %}
+                                <span class="text-danger"><i class="bi bi-x-circle"></i></span>
+                            {% endif %}
+                        </td>
+                        <td>
+                            {% if business.farmer_delivered %}
+                                <span class="text-success"><i class="bi bi-check-circle"></i></span>
+                            {% else %}
+                                <span class="text-danger"><i class="bi bi-x-circle"></i></span>
+                            {% endif %}
+                        </td>
+                        <td>
+                            {% if business.shop_received %}
+                                <span class="text-success"><i class="bi bi-check-circle"></i></span>
+                            {% else %}
+                                <span class="text-danger"><i class="bi bi-x-circle"></i></span>
+                            {% endif %}
+                        </td>
+                        <td><a href="{% url 'update_shopbusiness' business.pk %}" class="btn btn-primary">Update</a></td>
+                        <td><a href="{% url 'delete_shop_business' business.pk %}" class="btn btn-danger">Delete</a></td>
+
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+
+
+{% endblock %}

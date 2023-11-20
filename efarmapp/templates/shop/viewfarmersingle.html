@@ -1,0 +1,64 @@
+{% extends 'shop/base.html' %}
+
+{% load static %}
+
+{% block content %}
+
+<div class="container-fluid">
+    <div class="card">
+        <div class="card-body">
+            <div style="text-align: center;">
+                <a href="{{ farmers.imageURL }}" target="_blank">
+                    <img src="{{ farmers.imageURL }}" alt="Profile Picture" height="250px">
+                </a>
+            </div>
+            <br>
+            <h5 class="card-title fw-semibold mb-4 text-center">{{farmers.name}}</h5>
+            <br>
+            <p class="mb-0 text-center">District: {{farmers.district}}</p>
+            <p class="mb-0 text-center">Address: {{farmers.address}}</p>
+            <p class="mb-0 text-center"><a href="{{farmers.location}}">Location</a></p>
+            <p class="mb-0 text-center">Mobile Number: {{farmers.mobile_number}}</p>
+            <p class="mb-0 text-center">Fruits: {% if farmers.fruits %} Yes {% else %} No {% endif %}</p>
+            <p class="mb-0 text-center">Vegetables: {% if farmers.vegetables %} Yes {% else %} No {% endif %}</p>
+            <p class="mb-0 text-center">Bank Name: {{farmers.bank_name}}</p>
+            <p class="mb-0 text-center">Account Number: {{farmers.bank_account_number}}</p>
+            <p class="mb-0 text-center">IFSC: {{farmers.ifsc_code}}</p>
+            <p class="mb-0 text-center">Gpay/Upi Id: {{farmers.upi_id}}</p> 
+
+            <br>
+
+            <!-- Price Chart Table -->
+            <div class="container mt-4">
+                <h5 class="card-title fw-semibold mb-4">Product Chart</h5>
+                <div class="table-responsive">
+                    <table class="table table-bordered table-striped">
+                        <thead>
+                            <tr>
+                                <th>Item Name</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for item in productchart %}
+                                <tr>
+                                    <td>{{ item.item_name }}</td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <!-- End Price Chart Table -->
+            <br>
+            <div class="text-center">
+                <a href="{% url 'shop_business_request' farmers.pk %}" class="btn btn-success">Request Business</a>
+            </div>
+            <br>
+
+        </div>
+    </div>
+</div>
+
+
+
+{% endblock %}

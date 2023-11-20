@@ -1,0 +1,49 @@
+{% extends 'shop/base.html' %}
+
+{% load static %}
+
+{% block content %}
+
+
+<div class="container-fluid">
+    <div class="card">
+        <div class="card-body">
+            <h5 class="card-title fw-semibold mb-4">Update Price Chart</h5>
+            
+            <form method="POST">
+                {% csrf_token %}
+                
+                <!-- Item Name Input -->
+                <div class="mb-3">
+                    <label for="item_name" class="form-label">Item Name</label>
+                    <input type="text" class="form-control" id="item_name" name="item_name" value="{{pricechart.item_name}}" required>
+                </div>
+                
+                <!-- Price Input -->
+                <div class="mb-3">
+                    <label for="price" class="form-label">Price per kg</label>
+                    <input type="number" class="form-control" id="price" name="price" value="{{pricechart.item_perkg}}" required>
+                </div>
+
+                <div class="mb-3">
+                    <label for="fruits">Fruit</label>
+                    <input type="checkbox" id="fruits" name="fruits" {% if pricechart.fruits %}checked{% endif %}>
+                </div>
+        
+                <div class="mb-3">
+                    <label for="vegetables">Vegetable</label>
+                    <input type="checkbox" id="vegetables" name="vegetables" {% if pricechart.vegetables %}checked{% endif %}>
+                </div>
+                
+                <!-- Submit Button -->
+                <button type="submit" class="btn btn-success">Submit</button>
+            </form>
+            
+        </div>
+
+    </div>
+</div> 
+
+
+
+{% endblock %}

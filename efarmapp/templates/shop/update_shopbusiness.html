@@ -1,0 +1,49 @@
+{% extends 'shop/base.html' %}
+
+{% load static %}
+
+{% block content %}
+
+
+<div class="container-fluid">
+    <div class="card">
+        <div class="card-body">
+            <h5 class="card-title fw-semibold mb-4">Update Business</h5>
+
+            <div class="text-center">
+
+                <a href="{% url 'shop_accept_business' business.pk %}" class="btn btn-success">Accept Business</a>
+                <a href="{% url 'amount_paid' business.pk %}" class="btn btn-primary">Amount Paid</a>
+                <a href="{% url 'products_received' business.pk %}" class="btn btn-warning">Products Received</a>
+            </div>
+
+            <br>
+            
+            <form method="POST">
+                {% csrf_token %}
+                <div class="mb-3">
+                    <label class="form-label">Item: {{business.item_name}}</label>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Farmer Name: {{business.farmername}}</label>
+                </div>
+                <div class="mb-3">
+                    <label for="item_name" class="form-label">Item Quantity(in kg)</label>
+                    <input type="number" class="form-control" id="item_kg" name="item_kg" value="{{business.item_kg}}" required>
+                </div>
+                <div class="mb-3">
+                    <label for="amount" class="form-label">Amount you will pay</label>
+                    <input type="number" class="form-control" id="amount" name="amount" value="{{business.amount}}" required>
+                </div>     
+                <button type="submit" class="btn btn-success">Submit</button>
+
+            </form>
+            
+        </div>
+
+    </div>
+</div> 
+
+
+
+{% endblock %}

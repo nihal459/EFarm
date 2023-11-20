@@ -1,0 +1,58 @@
+{% extends 'shop/base.html' %}
+
+{% load static %}
+
+{% block content %}
+
+<style>
+    .farmer-card {
+      border: 1px solid #ced4da;
+      border-radius: 0.25rem;
+      box-shadow: 0 0 0.5rem rgba(0, 123, 255, 0.25);
+      transition: transform 0.2s, box-shadow 0.2s;
+      margin-bottom: 20px;
+      overflow: hidden;
+    }
+
+    .farmer-card:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 1rem rgba(0, 123, 255, 0.35);
+    }
+
+    .card-body {
+      padding: 20px;
+      text-align: center; /* Center align text */
+    }
+
+    .images {
+        max-width: 100%;
+        height: 150px; /* Set a fixed height for the images */
+        object-fit: cover; /* Ensure images maintain aspect ratio */
+        border-radius: 0.25rem;
+      }
+</style>
+
+
+<div class="container-fluid">
+  <div class="row">
+    {% for i in farmers %}
+      <div class="col-md-4">
+        <div class="farmer-card">
+          <a href="{% url 'viewfarmersingle' i.pk %}" style="color:black;"><div class="card-body">
+            <img src="{{i.imageURL}}" alt="{{i.name}}" class="images">
+
+            <h5 class="card-title fw-semibold mb-2">{{i.username}}</h5>
+            <p>{{i.name}}</p>
+
+            <p>Fruits: {% if i.fruits %} Yes {% else %} No {% endif %}</p>
+
+            <p>Vegetables: {% if i.vegetables %} Yes {% else %} No {% endif %}</p>
+          </div></a>
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+</div>
+  
+
+{% endblock %}

@@ -1,0 +1,102 @@
+{% extends 'farmer/base.html' %}
+
+{% load static %}
+
+{% block content %}
+
+<div style="padding:18px;">
+    <br>
+    <br>
+    <br>
+    <form action="#" enctype="multipart/form-data" method="POST">
+        {% csrf_token %}
+        <div style="text-align: center;">
+            <a href="{{ request.user.imageURL }}" target="_blank">
+                <img src="{{ request.user.imageURL }}" alt="Profile Picture" height="100px">
+            </a>
+                          
+            <br>
+          <label for="profile_picture" class="btn btn-success" style="cursor: pointer;">Choose Profile Picture</label>
+          <input type="file" id="profile_picture" name="profile_picture" style="display: none;">
+       </div>
+       <br>
+        <div class="form-group">
+            <label for="name">Name</label>
+            <input type="text" id="name" name="name" value="{{get_profile.name}}" class="form-control">
+        </div>
+        <div class="form-group">
+            <label for="mob">Phone Number</label>
+            <input type="text" id="mob" name="mob" value="{{get_profile.mobile_number}}" class="form-control">
+        </div>
+    
+    
+        <div class="form-group">
+            <label for="location">Location</label>
+            <input type="url" id="location" name="location" value="{{get_profile.location}}" class="form-control">
+        </div>
+        <div class="form-group">
+            <label for="district">District</label>
+            <select name="district" id="district" class="form-control" required>
+              <option value="" disabled selected>Select a district</option>
+              <option value="Thiruvananthapuram" {% if get_profile.district == 'Thiruvananthapuram' %}selected{% endif %}>Thiruvananthapuram</option>
+              <option value="Kollam" {% if get_profile.district == 'Kollam' %}selected{% endif %}>Kollam</option>
+              <option value="Pathanamthitta" {% if get_profile.district == 'Pathanamthitta' %}selected{% endif %}>Pathanamthitta</option>
+              <option value="Alappuzha" {% if get_profile.district == 'Alappuzha' %}selected{% endif %}>Alappuzha</option>
+              <option value="Kottayam" {% if get_profile.district == 'Kottayam' %}selected{% endif %}>Kottayam</option>
+              <option value="Idukki" {% if get_profile.district == 'Idukki' %}selected{% endif %}>Idukki</option>
+              <option value="Ernakulam" {% if get_profile.district == 'Ernakulam' %}selected{% endif %}>Ernakulam</option>
+              <option value="Thrissur" {% if get_profile.district == 'Thrissur' %}selected{% endif %}>Thrissur</option>
+              <option value="Palakkad" {% if get_profile.district == 'Palakkad' %}selected{% endif %}>Palakkad</option>
+              <option value="Malappuram" {% if get_profile.district == 'Malappuram' %}selected{% endif %}>Malappuram</option>
+              <option value="Kozhikode" {% if get_profile.district == 'Kozhikode' %}selected{% endif %}>Kozhikode</option>
+              <option value="Wayanad" {% if get_profile.district == 'Wayanad' %}selected{% endif %}>Wayanad</option>
+              <option value="Kannur" {% if get_profile.district == 'Kannur' %}selected{% endif %}>Kannur</option>
+              <option value="Kasaragod" {% if get_profile.district == 'Kasaragod' %}selected{% endif %}>Kasaragod</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="address">Address</label>
+            <textarea id="address" name="address" rows="4" class="form-control">{{get_profile.address}}</textarea>
+        </div>
+
+        <div class="form-group">
+            <label for="fruits">Fruit Business</label>
+            <input type="checkbox" id="fruits" name="fruits" {% if get_profile.fruits %}checked{% endif %}>
+        </div>
+
+        <div class="form-group">
+            <label for="vegetables">Vegetable Business</label>
+            <input type="checkbox" id="vegetables" name="vegetables" {% if get_profile.vegetables %}checked{% endif %}>
+        </div>
+
+        <br>
+
+        <div class="form-group">
+            <label for="bank_name">Bank Name</label>
+            <input type="text" id="bank_name" name="bank_name" value="{{get_profile.bank_name}}" class="form-control">
+        </div>
+
+        <div class="form-group">
+            <label for="bank_account_number">Bank Account Number</label>
+            <input type="text" id="bank_account_number" name="bank_account_number" value="{{get_profile.bank_account_number}}" class="form-control">
+        </div>
+
+
+        <div class="form-group">
+            <label for="ifsc_code">IFSC</label>
+            <input type="text" id="ifsc_code" name="ifsc_code" value="{{get_profile.ifsc_code}}" class="form-control">
+        </div>
+
+        <div class="form-group">
+            <label for="upi_id">UPI Id/Gpay Number</label>
+            <input type="text" id="upi_id" name="upi_id" value="{{get_profile.upi_id}}" class="form-control">
+        </div>
+
+
+        <br>
+        <input type="submit" value="Update" class="btn btn-success btn-lg">
+    </form>
+
+</div>
+
+{% endblock %}

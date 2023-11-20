@@ -1,0 +1,22 @@
+{% extends 'farmer/base.html' %}
+
+{% load static %}
+
+{% block content %}
+
+<div class="container-fluid">
+    <div class="card">
+      <div class="card-body">
+        <h5 class="card-title fw-semibold mb-4">Update Farmer Business</h5>
+
+        <div class="text-center">
+            <a href="{% url 'farmer_accept_business' business.pk %}" class="btn btn-success">Accept Business</a>
+            <a href="{% url 'amount_received' business.pk %}" class="btn btn-primary">Amount Received</a>
+            <a href="{% url 'products_delivered' business.pk %}" class="btn btn-warning">Products Delivered</a>
+        </div>
+
+      </div>
+    </div>
+</div>
+
+{% endblock %}
